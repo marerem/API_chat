@@ -339,8 +339,7 @@ def read_csv_and_process(file_content: bytes) -> pd.DataFrame:
 @app.post("/process_csv")
 async def create_file(file: Annotated[bytes | None, File()] = None):
     if not file:
-        return {"message": "No file sent"}
-    
+        return {"message": "No file sent"}   
     else:
         contents = await file.read()
         success, df = read_csv_and_process(contents)
