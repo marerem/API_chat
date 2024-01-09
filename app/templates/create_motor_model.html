@@ -38,6 +38,13 @@ input {
 input.invalid {
   background-color: #ffdddd;
 }
+.htmx-indicator {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 /* Hide all steps by default: */
 .tab {
@@ -93,6 +100,10 @@ button:hover {
   <div class="tab">
     <button type="button" class="file-upload-btn" onclick="uploadCSV()">Connect to influxdb</button>
     <input type="file" id="fileInput" accept=".csv" onchange="handleFile()" />
+    <!-- Loading indicator div -->
+    <div class="htmx-indicator">
+      <img alt="Result loading..." class="htmx-indicator" width="150" src="/img/bars.svg"/>
+    </div>
   </div>
   <div class="tab">Contact Info:
     <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
@@ -126,7 +137,7 @@ var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
 function handleFile() {
     const fileInput = document.getElementById('fileInput');
-    const loadingAnimation = document.getElementById('loadingAnimation');
+    const loadingIndicator = document.querySelector('.htmx-indicator');
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
 
