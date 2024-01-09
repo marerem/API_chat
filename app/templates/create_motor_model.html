@@ -131,8 +131,8 @@ function handleFile() {
 
         // Create a FormData object
         const formData = new FormData();
-        formData.append('csvFile', file); // 'csvFile' is the name of the field expected by the server
-
+        formData.set('csvFile', file); // 'csvFile' is the name of the field expected by the server
+        loadingAnimation.style.display = 'block';
         fetch('/process_csv', {
             method: 'POST',
             body: formData,
