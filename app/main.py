@@ -312,29 +312,24 @@ def query_influxdb():
 
 # Function to read data from a CSV file and perform operations
 def read_csv_and_process(file_content: bytes) -> pd.DataFrame:
-    try:
-        df = pd.read_csv(BytesIO(file_content))
-        #file_path= input("\nFile path .csv format (exmaple : black_influxdb_data.csv ): ")
-        #df = pd.read_csv(file_path)
-  
-        print(pd.DataFrame(df.head().iloc[:4,:10])) # for exmaple
-        search_value = 'Additional Test Config'
-        # Find the index of the row containing the value 'BlackBlockTest'
-        start_index = df[df.apply(lambda row: search_value in row.values, axis=1)].index[0]
+    df = pd.read_csv(BytesIO(file_content))
+    #file_path= input("\nFile path .csv format (exmaple : black_influxdb_data.csv ): ")
+    #df = pd.read_csv(file_path)
 
-        # Switch column names to match the values in the start_index row
-        df.columns = df.iloc[start_index]
+    print(pd.DataFrame(df.head().iloc[:4,:10])) # for exmaple
+    search_value = 'Additional Test Config'
+    # Find the index of the row containing the value 'BlackBlockTest'
+    start_index = df[df.apply(lambda row: search_value in row.values, axis=1)].index[0]
 
-        # Update the DataFrame to start from the found row and reset the index
-        df = df.iloc[start_index+1:].reset_index(drop=True)
+    # Switch column names to match the values in the start_index row
+    df.columns = df.iloc[start_index]
 
-        df = pd.DataFrame(df)
-        process_data(df)
-        return True, df
-    except Exception as e:
-        print(f"Error reading CSV file: {str(e)}")
-        raise
+    # Update the DataFrame to start from the found row and reset the index
+    df = df.iloc[start_index+1:].reset_index(drop=True)
 
+    df = pd.DataFrame(df)
+    process_data(df)
+    return True, df
 
 @app.post("/process_csv")
 async def create_file(file: Annotated[bytes | None, File()] = None):
