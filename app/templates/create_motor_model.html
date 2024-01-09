@@ -140,14 +140,15 @@ function handleFile() {
     const loadingIndicator = document.querySelector('.htmx-indicator');
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
+        console.log('Loading indicator:', loadingIndicator);
 
         // Create a FormData object
-        const formData = new FormData();
-        formData.set('csvFile', file); // 'csvFile' is the name of the field expected by the server
+        //const formData = new FormData();
+        //formData.set('csvFile', file); // 'csvFile' is the name of the field expected by the server
   
         fetch('/process_csv', {
             method: 'POST',
-            body: formData,
+            body: file,
         })
         .then(response => {
             if (!response.ok) {
