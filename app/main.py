@@ -320,7 +320,6 @@ def read_csv_and_process(file_content: bytes) -> pd.DataFrame:
     search_value = 'Additional Test Config'
     # Find the index of the row containing the value 'BlackBlockTest'
     start_index = df[df.apply(lambda row: search_value in row.values, axis=1)].index[0]
-
     # Switch column names to match the values in the start_index row
     df.columns = df.iloc[start_index]
 
