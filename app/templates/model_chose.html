@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>Glassmorphism Model Choice</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        /* Styles from the original code... */
+
+        #modelForm {
+            height: 520px;
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+
+        #modelForm * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        #modelForm h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        #modelTypeLabel {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        #modelType {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        #modelType:disabled {
+            background-color: #808080; /* Grey color when disabled */
+            cursor: not-allowed;
+        }
+
+        #nextBtnModel {
+            display: none;
+            margin-top: 20px;
+            background-color: #808080; /* Grey color when disabled */
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: not-allowed;
+        }
+
+        #nextBtnModel.active {
+            background-color: #5cb85c; /* Green color when enabled */
+            cursor: pointer;
+        }
+
+        #nextBtnModel:hover.active {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form id="modelForm">
+        <h3>Choose Your Model</h3>
+        <label id="modelTypeLabel" for="modelType">Select Model Type:</label>
+        <select id="modelType" name="modelType" onchange="handleModelTypeChange()" required disabled>
+            <option value="" selected disabled>Select Model Type</option>
+            <option value="DL">Deep Learning</option>
+            <option value="ML">Machine Learning</option>
+            <option value="Optimization">Optimization</option>
+        </select>
+        <button id="nextBtnModel" onclick="handleNextModel()" disabled>Next</button>
+    </form>
+
+    <!-- JavaScript to handle the model type selection and result display -->
+    <script>
+        const modelForm = document.getElementById('modelForm');
+        const modelTypeSelect = document.getElementById('modelType');
+        const nextBtnModel = document.getElementById('nextBtnModel');
+
+        function handleModelTypeChange() {
+            // Enable the "Next" button when a model type is selected
+            nextBtnModel.classList.add('active');
+            nextBtnModel.disabled = false;
+        }
+
+        function handleNextModel() {
+            // Redirect to the specified link
+            window.location.href = '/process_csv/model';
+        }
+    </script>
+</body>
+</html>

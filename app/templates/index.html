@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastAPI App</title>
+    <script src="/app/htmx.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #080710;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0; /* Initially hidden */
+            z-index: 1; /* Make sure blue circle is on top initially */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .language-selector {
+            display: flex;
+            color: #ffffff;
+        }
+
+        .signin-btn, .create-user-btn {
+            background-color: #d9534f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .signin-btn:hover, .create-user-btn:hover {
+            background-color: #c9302c;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .create-user-btn {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="language-selector">
+            <label for="language"></label>
+            <select id="language" onchange="changeLanguage(this.value)">
+                <option value="en">EN</option>
+                <option value="de">DE</option>
+            </select>
+        </div>
+        <a href="/signin"><button class="signin-btn">Sign In</button></a>
+    </div>
+
+    <h1>Welcome</h1>
+    <p>This is a simple FastAPI application that you can check the quality of your motor.</p>
+    <a href="/create_user"><button class="create-user-btn">Create User</button></a>
+
+    <script>
+        const translations = {
+            en: {
+                welcome: "Welcome",
+                description: "This is a simple FastAPI application that you can check the quality of your motor.",
+                createUser: "Create User"
+            },
+            de: {
+                welcome: "Willkommen",
+                description: "Dies ist eine einfache FastAPI-Anwendung, mit der Sie die Qualität Ihres Motors überprüfen können.",
+                createUser: "Benutzer erstellen"
+            }
+        };
+
+        function changeLanguage(language) {
+            const h1Element = document.querySelector("h1");
+            const descriptionElement = document.querySelector("p");
+            const createUserButton = document.querySelector(".create-user-btn");
+
+            h1Element.textContent = translations[language].welcome;
+            descriptionElement.textContent = translations[language].description;
+            createUserButton.textContent = translations[language].createUser;
+        }
+    </script>
+</body>
+</html>
+
